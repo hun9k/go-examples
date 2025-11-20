@@ -34,7 +34,6 @@ func main() {
 
 	// 启动 HTTP/1.1/2 服务TCP+TLS
 	wg.Go(func() {
-		defer wg.Done()
 		if err := http.ListenAndServeTLS(":443", certFile, keyFile, handler); err != nil {
 			slog.Error(err.Error())
 		}
@@ -42,7 +41,6 @@ func main() {
 
 	// 启动 HTTP/1.1/2 服务TCP
 	wg.Go(func() {
-		defer wg.Done()
 		if err := http.ListenAndServe(":80", handler); err != nil {
 			slog.Error(err.Error())
 		}
